@@ -1,0 +1,63 @@
+{
+  "data":[
+     {
+        "id":1,
+        "name":"New Zealand Lake Mountain",
+        "description":"A breathtaking vista of pristine mountain peaks reflected in crystal-clear alpine waters, where morning mist dances across the lake's surface creating an ethereal atmosphere perfect for meditation and soul-searching.",
+        "url":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-01-xl.jpg",
+        "sizes":{
+           "xs":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-01-xs.jpg",
+           "s":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-01-s.jpg",
+           "m":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-01-m.jpg",
+           "l":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-01-l.jpg",
+           "xl":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-01-xl.jpg"
+        }
+     },
+     {
+        "id":2,
+        "name":"New Zealand Lake Dock",
+        "description":"A weathered wooden dock extends into the tranquil waters like a bridge between earth and sky, where anglers cast their lines at dawn and couples share quiet moments watching the sun paint the water in golden hues.",
+        "url":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-02-xl.jpg",
+        "sizes":{
+           "xs":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-02-xs.jpg",
+           "s":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-02-s.jpg",
+           "m":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-02-m.jpg",
+           "l":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-02-l.jpg",
+           "xl":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-02-xl.jpg"
+        }
+     },
+     {
+        "id":3,
+        "name":"New Zealand Fjord Hut",
+        "description":"A cozy refuge nestled among towering fjord walls, this rustic hut serves as a beacon of warmth for weary travelers, offering shelter from mountain storms while providing panoramic views of nature's raw, untamed beauty.",
+        "url":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-03-xl.jpg",
+        "sizes":{
+           "xs":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-03-xs.jpg",
+           "s":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-03-s.jpg",
+           "m":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-03-m.jpg",
+           "l":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-03-l.jpg",
+           "xl":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-03-xl.jpg"
+        }
+     },
+     {
+        "id":4,
+        "name":"New Zealand Beach Sun Rise",
+        "description":"The day awakens with a symphony of colors as the sun emerges from the ocean's embrace, painting the pristine beach in shades of amber and rose while gentle waves whisper ancient secrets to the shore.",
+        "url":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-04-xl.jpg",
+        "sizes":{
+           "xs":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-04-xs.jpg",
+           "s":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-04-s.jpg",
+           "m":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-04-m.jpg",
+           "l":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-04-l.jpg",
+           "xl":"https://raw.githubusercontent.com/xfiveco/mock-api-images/main/images/img-04-xl.jpg"
+        }
+     },
+     {
+        "id":5,
+        "name":"no picture",
+        "description":"Sometimes the most beautiful moments exist only in our imagination, waiting to be captured by the mind's eye when technology fails to preserve the fleeting magic of life's unexpected encounters.",
+        "url":null,
+        "sizes":null
+     }
+  ]
+}
