@@ -11,6 +11,3 @@ export { useProductFilter } from './hooks/useProductFilter';
 
 // Types
 export type * from './types';
-
-// Data
-export * from './data/mockData';

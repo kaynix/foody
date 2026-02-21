@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'wouter';
 import { useTranslation } from 'react-i18next';
-import { getTranslatedCategoryName } from '../../data/mockData';
+import { getTranslatedCategoryName } from '../../utils/categoryUtils';
 import type { Category } from '../../types';
 
 interface SidebarProps {

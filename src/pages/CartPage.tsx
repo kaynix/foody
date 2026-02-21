@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'wouter';
 import { useTranslation } from 'react-i18next';
 import { useCart } from '../contexts/CartContext';
-import { getTranslatedCategoryName } from '../data/mockData';
+import { getTranslatedCategoryName } from '../utils/categoryUtils';
 
 const CartPage: React.FC = () => {
   const { t } = useTranslation();
@@ -62,7 +62,7 @@ const CartPage: React.FC = () => {
                         alt={item.product.name}
                         className="w-full h-full object-cover rounded-lg"
                         onError={(e) => {
-                          e.currentTarget.src = '/images/img-01-s.jpg';
+                          e.currentTarget.src = 'http://localhost:3001/images/product-1-s.jpg';
                         }}
                       />
                     </div>

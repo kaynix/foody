@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import Sidebar from './Sidebar';
-import { categories } from '../../data/mockData';
+import { fetchCategories } from '../../api/client';
+import type { Category } from '../../types';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -9,6 +10,11 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, onSearchChange }) => {
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    fetchCategories().then(setCategories).catch(console.error);
+  }, []);
 
   const handleSearchChange = (value: string) => {
     onSearchChange?.(value);

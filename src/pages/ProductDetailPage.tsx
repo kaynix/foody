@@ -1,11 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRoute } from 'wouter';
 import { useTranslation } from 'react-i18next';
-import { mockProducts, getTranslatedCategoryName } from '../data/mockData';
+import { fetchProduct } from '../api/client';
+import { getTranslatedCategoryName } from '../utils/categoryUtils';
 import { useCart } from '../contexts/CartContext';
 import Toast from '../components/ui/Toast';
 import EmptyImagePlaceholder from '../components/ui/EmptyImagePlaceholder';
-import imagesData from '../../images.json';
+
+const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3001';
+
+const getProductImages = (productId: number) => [
+  `${API_URL}/images/product-${productId}-xl.jpg`,
+  `${API_URL}/images/product-${productId}-l.jpg`,
+  `${API_URL}/images/product-${productId}-m.jpg`,
+  `${API_URL}/images/product-${productId}-s.jpg`,
+];
 
 const ProductDetailPage = () => {
   const [, params] = useRoute('/product/:id');
@@ -15,43 +24,25 @@ const ProductDetailPage = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
+  const [product, setProduct] = useState<import('../types').Product | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  // Find product by ID
-  const product = mockProducts.find(p => p.id === parseInt(params?.id || '0'));
+  useEffect(() => {
+    const id = parseInt(params?.id ?? '0', 10);
+    if (!id) { setLoading(false); return; }
+    fetchProduct(id)
+      .then(setProduct)
+      .catch(() => setProduct(null))
+      .finally(() => setLoading(false));
+  }, [params?.id]);
 
-  // Helper function to get image data from images.json
-  const getImageData = (productId: number) => {
-    const imageItem = imagesData.data.find(img => img.id === productId);
-    
-    // Handle case where image item exists but has no URL (like "no picture" item)
-    if (imageItem && !imageItem.url) {
-      return {
-        images: [],
-        description: imageItem.description || 'No image available for this item.',
-        isEmpty: true
-      };
-    }
-    
-    // Handle case where no matching image item found
-    if (!imageItem || !imageItem.sizes) {
-      return {
-        images: ['/images/img-01-xl.jpg'],
-        description: 'No additional image information available.',
-        isEmpty: false
-      };
-    }
-    
-    return {
-      images: [
-        imageItem.sizes.xl,
-        imageItem.sizes.l,
-        imageItem.sizes.m,
-        imageItem.sizes.s
-      ].filter(Boolean),
-      description: imageItem.description || product?.description || '',
-      isEmpty: false
-    };
-  };
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <span className="loading loading-spinner loading-lg text-primary" />
+      </div>
+    );
+  }
 
   if (!product) {
     return (
@@ -65,11 +56,10 @@ const ProductDetailPage = () => {
   }
 
   // Mock additional product data for detailed view
-  const imageData = getImageData(product.id);
   const productDetails = {
     ...product,
-    images: imageData.images,
-    fullDescription: `${imageData.description}
+    images: getProductImages(product.id),
+    fullDescription: `${product.description}
 
 This premium product features high-quality materials and exceptional craftsmanship. Perfect for daily use, it combines functionality with style to meet all your needs.
 
@@ -141,7 +131,7 @@ Key Features:
           <div className="space-y-4">
             {/* Main Image */}
             <div className="aspect-square bg-base-200 rounded-lg overflow-hidden">
-              {imageData.isEmpty || productDetails.images.length === 0 ? (
+              {productDetails.images.length === 0 ? (
                 <EmptyImagePlaceholder 
                   className="w-full h-full rounded-lg"
                   title="No Image Available"
@@ -170,7 +160,7 @@ Key Features:
             </div>
             
             {/* Thumbnail Images */}
-            {!imageData.isEmpty && productDetails.images.length > 1 && (
+            {productDetails.images.length > 1 && (
               <div className="flex space-x-2">
                 {productDetails.images.map((image, index) => (
                   <button

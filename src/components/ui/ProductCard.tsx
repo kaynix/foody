@@ -3,7 +3,7 @@ import { Link } from 'wouter';
 import { useTranslation } from 'react-i18next';
 import { useCart } from '../../contexts/CartContext';
 import type { Product } from '../../types';
-import { getTranslatedCategoryName } from '../../data/mockData';
+import { getTranslatedCategoryName } from '../../utils/categoryUtils';
 
 interface ProductCardProps {
   product: Product;
@@ -22,7 +22,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             alt={product.name} 
             className="w-full h-48 object-cover hover:scale-105 transition-transform"
             onError={(e) => {
-              e.currentTarget.src = '/images/img-01-m.jpg';
+              e.currentTarget.src = 'http://localhost:3001/images/product-1-m.jpg';
             }}
           />
         </figure>

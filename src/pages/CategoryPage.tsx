@@ -1,17 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRoute } from 'wouter';
 import { useTranslation } from 'react-i18next';
 import ProductGrid from '../components/ui/ProductGrid';
-import { mockProducts, categories, getTranslatedCategoryName } from '../data/mockData';
+import { fetchCategoryBySlug } from '../api/client';
+import { getTranslatedCategoryName } from '../utils/categoryUtils';
+import type { Category, Product } from '../types';
 
 const CategoryPage: React.FC = () => {
   const [, params] = useRoute('/category/:slug');
   const { t } = useTranslation();
+  const [category, setCategory] = useState<Category | null>(null);
+  const [categoryProducts, setCategoryProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
 
-  // Find category by slug
-  const category = categories.find(cat => cat.slug === params?.slug);
-  
-  if (!category) {
+  useEffect(() => {
+    if (!params?.slug) return;
+    setLoading(true);
+    setNotFound(false);
+    fetchCategoryBySlug(params.slug)
+      .then(({ category: cat, products }) => {
+        setCategory(cat);
+        setCategoryProducts(products);
+      })
+      .catch(() => setNotFound(true))
+      .finally(() => setLoading(false));
+  }, [params?.slug]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <span className="loading loading-spinner loading-lg text-primary" />
+      </div>
+    );
+  }
+
+  if (notFound || !category) {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="text-center">
@@ -21,9 +45,6 @@ const CategoryPage: React.FC = () => {
       </div>
     );
   }
-
-  // Filter products by category ID
-  const categoryProducts = mockProducts.filter(product => product.categoryId === category.id);
 
   return (
     <div className="p-6">

@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import type { Product } from '../types';
-import { getCategoryNameById } from '../data/mockData';
+import { getCategoryNameById } from '../utils/categoryUtils';
 
 export const useProductFilter = (products: Product[]) => {
   const [searchTerm, setSearchTerm] = useState('');
